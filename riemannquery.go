@@ -11,7 +11,7 @@ import (
 func main() {
 
 	var server, query string
-	flag.StringVar(&server, "s", "riemann:5555", "riemann server")
+	flag.StringVar(&server, "s", "localhost:5555", "riemann server")
 	flag.StringVar(&query, "q", "true", "query string")
 	flag.Parse()
 
