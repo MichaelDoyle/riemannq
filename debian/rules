@@ -1,0 +1,40 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+#export GOPATH=$(CURDIR)
+
+PKGDIR=debian/tmp
+PKGNAME=riemannq
+
+%:
+	dh $@
+
+clean:
+	dh_clean
+	rm -rf $(GOPATH)/bin/* $(GOPATH)/pkg/*
+	rm -f $(GOPATH)/goinstall.log
+	rm -f debian/debhelper.log
+	rm -f debian/*.debhelper
+	rm -f debian/substvars
+	rm -f debian/files
+	rm -rf debian/tmp/
+
+binary-arch: clean
+	dh_prep
+	dh_installdirs
+	cd $(GOPATH) && go install $(PKGNAME)
+	mkdir -p $(PKGDIR)/usr/bin
+	cp $(GOPATH)/bin/* $(PKGDIR)/usr/bin/
+	dh_installinit
+	dh_strip
+	dh_compress
+	dh_fixperms
+	dh_installdeb
+	dh_gencontrol
+	dh_md5sums
+	dh_builddeb
+
+binary: binary-arch

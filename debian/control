@@ -1,0 +1,12 @@
+Source: riemannq
+Section: net
+Priority: extra
+Maintainer: Michael Doyle <michael.james.doyle@gmail.com>
+Build-Depends: debhelper (>= 7.0.50~), go
+Standards-Version: 3.9.1
+Homepage: https://github.com/MichaelDoyle/riemannq
+
+Package: riemannq
+Architecture: amd64
+Depends: ${misc:Depends}
+Description: Dead simple query tool for Riemann
